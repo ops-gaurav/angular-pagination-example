@@ -17,24 +17,32 @@
 
         <!--ngMask -->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js'></script
-        <!-- font awesome CDN-->
-        <!--<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' type='text/css' rel='stylesheet' />-->
+
+        <!-- injecting ngToast dependency  -->
+        <link href='https://rawgit.com/tameraydin/ngToast/master/dist/ngToast.min.css'  rel='stylesheet' type='text/css'/>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.1/angular-sanitize.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js'></script>
+        <script src='https://rawgit.com/tameraydin/ngToast/master/dist/ngToast.min.js'></script>
+
 
         <script src='/javascripts/angular/app.js'></script>
     </head>
-    <body>
+    <body ng-controller='AppMiscController'>
+        <!-- The app header -->
         <header>
             <nav class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">Title</a>
                 </div>
-            </nav>
-            
+            </nav>    
         </header>
+
+        <!-- The body content -->
         <section ui-view></section>
+        
+        <!-- the app footer -->
+        <footer></footer>
 
-        <footer>
-
-        </footer>
+        <toast></toast>
     </body>
 </html>

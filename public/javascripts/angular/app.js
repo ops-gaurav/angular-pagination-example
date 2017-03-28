@@ -1,5 +1,10 @@
-var app = angular.module ('app', ['ui.router', 'ngMask']);
-app.config (['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+var app = angular.module ('app', ['ui.router', 'ngMask', 'ngToast']);
+/**
+ * the routing configurtions
+ */
+app.config (['$stateProvider', 
+            '$urlRouterProvider', 
+            '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider.state ('/default', {
         url: '/',
@@ -14,10 +19,13 @@ app.config (['$stateProvider', '$urlRouterProvider', '$locationProvider', functi
     });
 }]);
 
-app.controller ('RegisterController', ['$scope', '$http', function ($scope, $http) {
+/**
+ * the register controller containing the business logic
+ * for the register related activities
+ */
+app.controller ('RegisterController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
 
     $scope.credentials = {};
-
     /**
      * authenticating the username on keydown event
      */
@@ -51,17 +59,20 @@ app.controller ('RegisterController', ['$scope', '$http', function ($scope, $htt
      * validating the email address on the keydown
      */
     $scope.emailLookup = function () {
+        // if the field contains some value
         if ($scope.credentials.email && $scope.credentials.email != '') {
             console.log ('looking for email '+ $scope.credentials.email);
             $http.get ('/user/hasEmail/'+ $scope.credentials.email). then (function (data) {
                 if (data.data.status == 'success') {
                     console.log ('email exists');
-
+                    // email exists
+                    // invalidate field and show error
                     $scope.registerForm.email.$setValidity ('', false);
                     $scope.unavailableEmail = true;
                 } else {
                     console.log (data.data.message);
-
+                    // email does not exists
+                    // validate field and hide error
                     $scope.registerForm.email.$setValidity ('', true);
                     $scope.unavailableEmail = false;
                 }
@@ -69,6 +80,7 @@ app.controller ('RegisterController', ['$scope', '$http', function ($scope, $htt
                 console.error (data.data.message);
             });
         } else {
+            // otherwise invalidate form and hide error message
             $scope.registerForm.email.$setValidity ('', false);
             $scope.unavailableEmail = false;
         }
@@ -78,6 +90,36 @@ app.controller ('RegisterController', ['$scope', '$http', function ($scope, $htt
      * process the persistence of user data
      */
     $scope.submit = function () {
-        alert ('submit');
+        if ($scope.registerForm.$valid) {
+            console.log ($scope.credentials);
+            $http.post ('/user/create', $scope.credentials). then (function (data) {
+                if (data.data.status ='success'){
+                    console.log ('saved user');
+                    $rootScope.showToast ('User created sucessfully');
+                    $scope.credentials = undefined;
+                } else 
+                    console.error (data.data.message);
+            }, function (data) {
+                console.error (data);
+            });
+        } else {
+            console.log ('there are errors in the form');
+        }
     }
+}]);
+
+app.controller ('AppMiscController', ['$rootScope','ngToast', function ($rootScope, ngToast){
+    $rootScope.showToast = function (message) {
+        $rootScope.customToast = ngToast.create ({
+            className: 'success',
+            content: message
+        });
+
+        setTimeout (2000, $rootScope.hideToast);
+    }
+
+    $rootScope.hideToast = function () {
+        ngToast.dismiss ($rootScope.customToast);
+    }
+
 }]);

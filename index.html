@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+	<head>
+		<title>Pagination</title>
+
+		<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
+		<script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js'></script>
+
+		<script src='module.js'></script>
+	<body ng-controller='PaginationController'>
+		<div class='container'>
+
+			<h1 class='page-header'>Pagination Angular Example</h1>
+
+			<div ng-repeat='item in items'>
+				<b>{{item.id}}&nbsp;<i>{{item.value}}</i></b>
+			</div>
+
+			
+			<ul class="pagination">
+				<li ng-class='{disabled: pages.currentPage == 1}'>
+					<a ng-click='updatePage (1)' href="#">&laquo;&nbsp;first</a>
+				</li>
+				<li ng-repeat='p in pages.pages' ng-class='{active: pages.currentPage == p}'>
+					<a ng-click='updatePage(p)'>{{p}}</a>
+				</li>
+				<li ng-class='{disabled: pages.currentPage == pages.totalPages}'>
+					<a href="#" ng-click='updatePage(pages.totalPages)'>last &nbsp;&raquo;</a>
+				</li>
+			</ul>
+			
+		</div>
+	</body>
+</html>

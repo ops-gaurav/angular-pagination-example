@@ -125,7 +125,7 @@ router.get ('/hasEmail/:email', (req, res) => {
         User.findOne ({email: req.params.email}, (err, doc) => {
             if (err) res.send ( error ('server error: '+ err));
             else if (doc) res.send ( success ('email exists'));
-            else res.send (error ('no username'));
+            else res.send (error ('Unique email'));
 
             mongoose.disconnect ();
         });

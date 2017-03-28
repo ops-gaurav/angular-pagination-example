@@ -17,7 +17,7 @@ app.controller ('PaginationController', ['$scope', 'PaginationService', function
 		{id:  14 , value: "some value"},
 		{id:  15 , value: "some value"},
 		{id:  16 , value: "some value"},
-		{id:  17 , value: "some value"},
+		{ id:  17 , value: "some value"},
 		{id:  18 , value: "some value"},
 		{id:  19 , value: "some value"},
 		{id:  20 , value: "some value"},

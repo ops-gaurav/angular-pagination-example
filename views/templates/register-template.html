@@ -1,0 +1,44 @@
+<style>
+    input.ng-invalid {
+        border: solid 1px tomato;
+    }
+    input.ng-valid {
+        border: solid 1px cornflowerblue;
+    }
+</style>
+<section class='container'>
+    <section class='row'>
+        <section class='col-md-3'></section>
+        <section class='col-md-6'>
+            <form name='registerForm' ng-submit="submit()">
+                <legend>Register here</legend>
+                <div class="form-group">
+                    <input type="text"  name='fullname' ng-model= 'credentials.fullname' class="form-control" id="" placeholder="Full name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name='phone' ng-model='credentials.phoneMasked' mask='999-999-9999' clean='true' class="form-control" id="" placeholder="Phone number" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" ng-keyup="emailLookup()" name='email' ng-model='credentials.email' class="form-control" id="" placeholder="Email" required>
+                    <span class='label label-danger' ng-show='unavailableEmail'>Email already registered</span>
+                </div>
+                <div class="form-group">
+                    <input data-ng-keyup='usernameLookup()' type="text" name='username' ng-model='credentials.username' class="form-control" id="" placeholder="username" required>
+                    <span class='label label-danger' ng-show='unavailableUsername'>Username already exists</span>
+                </div>
+                <div class="form-group">
+                    <input type="url" name='url' ng-model='credentials.url' class="form-control" id="" placeholder="url" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name='password' ng-model='credentials.password' class="form-control" id="" placeholder="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name='address' ng-model='credentials.address' class="form-control" id="" placeholder="address" required>
+                </div>
+                <button type="submit" ng-disabled='registerForm.$invalid' class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+
+        <section class='col-md-3'></section>
+    </section>
+</section>

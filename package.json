@@ -1,0 +1,28 @@
+{
+  "name": "angular-pagination-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharma02gaurav/angular-pagination-example.git"
+  },
+  "author": "gaurav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharma02gaurav/angular-pagination-example/issues"
+  },
+  "homepage": "https://github.com/sharma02gaurav/angular-pagination-example#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.2.1",
+    "mongoose": "^4.9.2",
+    "morgan": "^1.8.1"
+  }
+}

@@ -1,0 +1,3 @@
+{"_id":{"$oid":"58dab9aceff37b22484ccaa9"},"fullname":"jeni kaur","phone":2.874872364e+09,"email":"jeni.kaur@smartdatainc.net","username":"jenikaur","url":"http://facebook.com","password":"2202319","address":"PU","interests":[],"__v":0}
+{"_id":{"$oid":"58dac58fb5282727e55547bd"},"fullname":"Kamal Dolikay","phone":8.787878676e+09,"email":"kamal.dolikey@smartdatainc.net","username":"kd","url":"http://google.com","password":"2202319","address":"sector 20","interests":[],"__v":0}
+{"_id":{"$oid":"58dac5ccb5282727e55547be"},"fullname":"Gaurav Sharma","phone":9.04176656e+09,"email":"sharma02gaurav@gmail.com","username":"sharma02gaurav","url":"http://sharma02gaurav.wordpress.com","password":"2202319","address":"HIG","interests":[],"__v":0}

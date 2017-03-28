@@ -31,12 +31,10 @@ app.controller ('RegisterController', ['$scope', '$rootScope', '$http', function
      */
     $scope.usernameLookup = function () {
         if ($scope.credentials.username && $scope.credentials.username != '') {
-            console.log ('looking for '+ $scope.credentials.username);
 
             $http.get ('/user/hasUsername/'+ $scope.credentials.username).then (function (data) {
                 var response = data.data;
                 if (response.status == 'success') {
-                    console.log ('username exists');
                     // invalidate the form's username input field
                     $scope.registerForm.username.$setValidity ('', false);
                     $scope.unavailableUsername = true;
@@ -61,10 +59,8 @@ app.controller ('RegisterController', ['$scope', '$rootScope', '$http', function
     $scope.emailLookup = function () {
         // if the field contains some value
         if ($scope.credentials.email && $scope.credentials.email != '') {
-            console.log ('looking for email '+ $scope.credentials.email);
             $http.get ('/user/hasEmail/'+ $scope.credentials.email). then (function (data) {
                 if (data.data.status == 'success') {
-                    console.log ('email exists');
                     // email exists
                     // invalidate field and show error
                     $scope.registerForm.email.$setValidity ('', false);
@@ -91,7 +87,6 @@ app.controller ('RegisterController', ['$scope', '$rootScope', '$http', function
      */
     $scope.submit = function () {
         if ($scope.registerForm.$valid) {
-            console.log ($scope.credentials);
             $http.post ('/user/create', $scope.credentials). then (function (data) {
                 if (data.data.status ='success'){
                     console.log ('saved user');

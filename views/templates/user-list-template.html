@@ -4,8 +4,20 @@
 
 	
 	<section class="panel panel-default">
-		<section class='panel-header'>
+		<section class='panel-heading'>
 			<!-- contains sorting fields-->
+			<div class="dropdown">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				Sort by: {{sortparam}}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<li ng-class='{active: sortparam == "email"}' ng-click='sortBy ("email")'><a href="#">Email</a></li>
+				<li ng-class='{active: sortparam == "fullname"}'><a href="#" ng-click='sortBy ("fullname")'>Full name</a></li>
+				<li ng-class='{active: sortparam == "username"}'><a href="#" ng-click='sortBy ("username")'>Username</a></li>
+				<li ng-class='{active: sortparam == "phone"}'><a href="#" ng-click='sortBy ("phone")'>Phone number</a></li>
+			</ul>
+			</div>
 		</section>
 		<section class="panel-body">
 			<!-- contins data -->
@@ -13,6 +25,11 @@
 			   <h3>{{user.fullname}} @ <a><b>{{user.username}}</b></a></h3> from <i>{{user.address}}</i> <br/>
 			   Write to {{user.fullname}} at <a href=''>{{user.email}}</a><br/>
 			   Website <a ng-href='user.url'>{{user.url}}</a><br/>
+			   <p>
+				   
+				   <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+				   <b>{{user.phone}}</b>
+				</p>
 			   <button class='btn btn-danger btn-sm'>
 			 	 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 			   </button>

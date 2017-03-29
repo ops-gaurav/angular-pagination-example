@@ -112,8 +112,14 @@ app.controller ('RegisterController', ['$scope', '$rootScope', '$http', function
 app.controller ('UsersListController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
     $rootScope.showToast ('loaded users view');
 
-    $scope.fetchUserPage = function (pageNumber) {
-        $http.get ('/user/page/'+ pageNumber).then (function (data) {
+    $scope.sortparam = 'fullname';
+    $scope.sortBy = function (sortby) {
+        $scope.sortparam = sortby;
+        $scope.fetchUserPage (1, sortby);
+    }
+    $scope.fetchUserPage = function (pageNumber, sortby) {
+        var sortBy = sortby || $scope.sortparam;
+        $http.get ('/user/page/'+ pageNumber+'/sortby/'+ sortBy).then (function (data) {
             if (data.data.status == 'success') {
                 $scope.data = data.data.data.raw;
                 $scope.pagination = data.data.data.misc;
@@ -121,10 +127,10 @@ app.controller ('UsersListController', ['$scope', '$rootScope', '$http', functio
                 console.log ($scope.data);
                 console.log ($scope.pagination);
             } else {
-                $rootScope.showToast (data.data.message);
+                $rootScope.showToast (data.data.data.message);
             }
         }, function (data) {
-            $rootScope.showToast (data.data.message);
+            $rootScope.showToast (data);
         });
     };
 

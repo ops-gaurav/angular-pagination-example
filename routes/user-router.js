@@ -45,7 +45,7 @@ router.post ('/create', (req, res) => {
  * number of items per page is hard coded but could be implemented
  * into url params
  */
-router.get ('/page/:number', (req, res) => {
+router.get ('/page/:number/sortby/:sortby', (req, res) => {
     
     var pageItems = 2;
     var currentPage = parseInt(req.params.number) || 1;
@@ -53,7 +53,17 @@ router.get ('/page/:number', (req, res) => {
     mongoose.Promise = es6Promise;
     mongoose.connect (config.host, config.db);
 
-    User.find ({}, (err, doc) => {
+    var sortQuery = {};
+    if (req.params.sortby == 'email')
+        sortQuery = {'email': 1};
+    else if (req.params.sortby == 'username')
+       sortQuery = {'username': 1};
+    else if (req.params.sortby == 'phone')
+       sortQuery = {'phone': 1};
+    else
+        sortQuery = {'fullname': 1};
+    
+    User.find({}).sort (sortQuery).exec ((err, doc) => {
         if (err) res.send ( error ('Server error: '+ err));
         else if (doc && doc.length > 0) {
 
@@ -96,8 +106,6 @@ router.get ('/page/:number', (req, res) => {
                     pages: pageIndexes
                 }
 			};
-
-            console.log (responseData);
             
             res.send ( data (responseData));
 
@@ -113,8 +121,70 @@ router.get ('/page/:number', (req, res) => {
                     pages: 0
                 }
             }));
+        
         mongoose.disconnect();
     });
+
+    // User.find ({}, (err, doc) => {
+    //     if (err) res.send ( error ('Server error: '+ err));
+    //     else if (doc && doc.length > 0) {
+
+    //         var totalPages = Math.ceil ( doc.length / pageItems );
+
+    //         var startIndex = ((currentPage-1) * pageItems);
+    //         var endIndex = Math.min ( startIndex + pageItems, doc.length);
+
+    //         var pageIndexes = [];
+
+    //         if (currentPage <= 3) 
+    //             for (var i=1; i<=6 ; i++) {
+    //                 if (i > totalPages)
+    //                     break;
+    //                 pageIndexes.push (i);
+    //             }
+    //         else if (currentPage == totalPages) {
+    //             for (var i=currentPage-5; i<=totalPages; i++) {
+    //                 if (i > totalPages)
+    //                     break;
+    //                 pageIndexes.push (i);
+    //             }
+    //         } else {
+    //             for (var i=currentPage-3; i<=currentPage; i++) 
+	// 				pageIndexes.push (i);
+	// 			for (var i=currentPage+1; i<=currentPage+2; i++) {
+	// 				if (i > totalPages)
+	// 					break;
+	// 				pageIndexes.push (i);
+	// 			}
+    //         }
+
+    //         var responseData = {
+    //             raw: doc.slice (startIndex, endIndex), misc: {
+    //                 totalPages: totalPages,
+    //                 currentPage: currentPage,
+    //                 pageItems: pageItems,
+    //                 startIndex: startIndex,
+    //                 endIndex: endIndex,
+    //                 pages: pageIndexes
+    //             }
+	// 		};
+            
+    //         res.send ( data (responseData));
+
+    //     } else 
+    //         res.send ( data ({
+    //             raw: undefined,
+    //             misc: {
+    //                 totalPages: 0,
+    //                 currentPage: currentPage,
+    //                 pageItems: 0,
+    //                 startIndex: 0,
+    //                 endIndex: 0,
+    //                 pages: 0
+    //             }
+    //         }));
+    //     mongoose.disconnect();
+    // });
 });
 
 

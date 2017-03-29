@@ -47,7 +47,7 @@ router.post ('/create', (req, res) => {
  */
 router.get ('/page/:number', (req, res) => {
     
-    var pageItems = 10;
+    var pageItems = 2;
     var currentPage = parseInt(req.params.number) || 1;
 
     mongoose.Promise = es6Promise;
@@ -96,6 +96,8 @@ router.get ('/page/:number', (req, res) => {
                     pages: pageIndexes
                 }
 			};
+
+            console.log (responseData);
             
             res.send ( data (responseData));
 

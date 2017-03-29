@@ -1,0 +1,46 @@
+<section class='container'>
+	<a href='/' class='btn btn-default'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Back</a>
+	<h1>Users list page</h1>
+
+	
+	<section class="panel panel-default">
+		<section class='panel-header'>
+			<!-- contains sorting fields-->
+		</section>
+		<section class="panel-body">
+			<!-- contins data -->
+		   <section ng-repeat='user in data'>
+			   <h3>{{user.fullname}} @ <a><b>{{user.username}}</b></a></h3> from <i>{{user.address}}</i> <br/>
+			   Write to {{user.fullname}} at <a href=''>{{user.email}}</a><br/>
+			   Website <a ng-href='user.url'>{{user.url}}</a><br/>
+			   <button class='btn btn-danger btn-sm'>
+			 	 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+			   </button>
+			   <button class='btn btn-primary btn-sm'>
+			 	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+			   </button>
+			   <hr/>
+		   </section>
+		</section>
+
+		<section class='panel-footer text-center'>
+			<!-- contains pagination -->
+			
+			<ul class="pagination">
+				<li ng-disabled='pagination.currentPage == 1' ng-click='fetchUserPage (1)'>
+					<a href="#">&laquo;</a>
+				</li>
+
+				<li ng-repeat='page in pagination.pages' ng-class='{active: pagination.currentPage == page}' ng-click='fetchUserPage (page)'>
+					<a>{{page}}</a>
+				</li>
+
+				<li ng-disabled='pagination.currentPage == pagiation.totalPages' ng-click='fetchUserPage (pagination.totalPages)'>
+					<a href="#">&raquo;</a>
+				</li>
+			</ul>
+			
+		</section>
+	</section>
+	
+</section>

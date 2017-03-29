@@ -6,11 +6,17 @@ app.config (['$stateProvider',
             '$urlRouterProvider', 
             '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    $stateProvider.state ('/default', {
-        url: '/',
-        templateUrl: '/templates/register-template.html',
-        controller: 'RegisterController'
-    });
+    $stateProvider
+        .state ('/default', {
+            url: '/',
+            templateUrl: '/templates/register-template.html',
+            controller: 'RegisterController'
+        })
+        .state ('/userList', {
+            url: '/users',
+            templateUrl: '/templates/user-list-template.html',
+            controller: 'UsersListController'
+        });
 
     $urlRouterProvider.otherwise ('/register');
     $locationProvider.html5Mode ({
@@ -101,6 +107,28 @@ app.controller ('RegisterController', ['$scope', '$rootScope', '$http', function
             console.log ('there are errors in the form');
         }
     }
+}]);
+
+app.controller ('UsersListController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+    $rootScope.showToast ('loaded users view');
+
+    $scope.fetchUserPage = function (pageNumber) {
+        $http.get ('/user/page/'+ pageNumber).then (function (data) {
+            if (data.data.status == 'success') {
+                $scope.data = data.data.data.raw;
+                $scope.pagination = data.data.data.misc;
+                
+                console.log ($scope.data);
+                console.log ($scope.pagination);
+            } else {
+                $rootScope.showToast (data.data.message);
+            }
+        }, function (data) {
+            $rootScope.showToast (data.data.message);
+        });
+    };
+
+    $scope.fetchUserPage (1);
 }]);
 
 app.controller ('AppMiscController', ['$rootScope','ngToast', function ($rootScope, ngToast){

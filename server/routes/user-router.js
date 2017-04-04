@@ -187,6 +187,30 @@ router.get ('/page/:number/sortby/:sortby', (req, res) => {
     // });
 });
 
+router.get ('/search/:text/field/:field', (req, res) => {
+    // var searchQuery = req.params.text;
+    // var searchField = req.params.field;
+
+    // var searchQuery = {};
+    // var regex = new RegExp (searchQuery, "i");
+
+    // if (searchField == 'email')
+    //     searchQuery = {'email': regex}
+    // else if (searchField == 'username')
+    //     searchQuery = {'username': regex};
+    // else if (searchField == 'phone')
+    //     searchQuery = {'phone': regex};
+    // else
+    //     searchQuery = {'fullname': regex};
+
+    // mongoose.Promise = es6Promise;
+    // mongoose.connect (config.host, config.db);
+
+    // User.findOne (searchQuery, (req, res) => {
+
+    // });
+});
+
 
 /**
  * router to check if username exists already

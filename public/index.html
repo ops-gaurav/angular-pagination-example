@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'>
+        <title>Your title goes here</title>
+        
+
+        <script src='/jquery/dist/jquery.min.js'></script>
+        <script src='/bootstrap/dist/js/bootstrap.min.js'></script>
+        <link href='/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet'/>
+
+        <script src='/angular/angular.min.js'></script>
+        <script src='/angular-resource/angular-resource.min.js'></script>
+        <script src='/angular-ui-router/release/angular-ui-router.min.js'></script>
+
+        <!-- ngMask import -->
+        <script src='/ngMask/dist/ngMask.min.js'></script>
+
+        <!-- ngToast-->
+        <link href='/ngToast/dist/ngToast.min.css' rel='stylesheet'/>
+        <script src='/ngToast/dist/ngToast.min.js'></script>
+        <!-- ngToast dependencies -->
+        <script src='/angular-animate/angular-animate.min.js'></script>
+        <script src='/angular-sanitize/angular-sanitize.min.js'></script>
+
+
+        <script src='/javascripts/angular/app.js'></script>
+    </head>
+    <body ng-controller='AppMiscController'>
+        <!-- The app header -->
+        <header>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Title</a>
+                </div>
+            </nav>    
+        </header>
+
+
+        <!-- The body content -->
+        <section ui-view></section>
+        
+        <!-- the app footer -->
+        <footer></footer>
+
+        <toast></toast>
+    </body>
+</html>

@@ -117,6 +117,11 @@ app.controller ('UsersListController', ['$scope', '$rootScope', '$http', functio
         $scope.sortparam = sortby;
         $scope.fetchUserPage (1, sortby);
     }
+
+    $scope.fetchSearchResults = function () {
+        
+    }
+
     $scope.fetchUserPage = function (pageNumber, sortby) {
         var sortBy = sortby || $scope.sortparam;
         $http.get ('/user/page/'+ pageNumber+'/sortby/'+ sortBy).then (function (data) {

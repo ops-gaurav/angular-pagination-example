@@ -1,0 +1,82 @@
+<section class='container'>
+	<a href='/' class='btn btn-default'><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;Back</a>
+	<h1>Users list page</h1>
+
+	
+	<section class="panel panel-default">
+		<section class='panel-heading'>
+			<!-- contains sorting fields-->
+			<!--<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					Sort by: {{sortparam}}
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li ng-class='{active: sortparam == "email"}' ng-click='sortBy ("email")'><a href="#">Email</a></li>
+					<li ng-class='{active: sortparam == "fullname"}'><a href="#" ng-click='sortBy ("fullname")'>Full name</a></li>
+					<li ng-class='{active: sortparam == "username"}'><a href="#" ng-click='sortBy ("username")'>Username</a></li>
+					<li ng-class='{active: sortparam == "phone"}'><a href="#" ng-click='sortBy ("phone")'>Phone number</a></li>
+				</ul>
+			</div>-->
+			<div class="form-group">
+				<div class="input-group">
+					<label class="sr-only" for="extra3">Extra name 3</label>
+					<input type="text" id="extra3" class="form-control" placeholder="Search the users">
+					<span class="input-group-addon">
+						<div class="dropdown">
+							<button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Sort by: {{sortparam}}
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li ng-class='{active: sortparam == "email"}' ng-click='sortBy ("email")'><a href="#">Email</a></li>
+								<li ng-class='{active: sortparam == "fullname"}'><a href="#" ng-click='sortBy ("fullname")'>Full name</a></li>
+								<li ng-class='{active: sortparam == "username"}'><a href="#" ng-click='sortBy ("username")'>Username</a></li>
+								<li ng-class='{active: sortparam == "phone"}'><a href="#" ng-click='sortBy ("phone")'>Phone number</a></li>
+							</ul>
+						</div>
+					</span>
+				</div>
+			</div>
+		</section>
+		<section class="panel-body">
+			<!-- contains data -->
+		   <section ng-repeat='user in data'>
+			   <h3>{{user.fullname}} @ <a><b>{{user.username}}</b></a></h3> from <i>{{user.address}}</i> <br/>
+			   Write to {{user.fullname}} at <a href=''>{{user.email}}</a><br/>
+			   Website <a ng-href='user.url'>{{user.url}}</a><br/>
+			   <p>
+				   <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+				   <b>{{user.phone}}</b>
+				</p>
+			   <button class='btn btn-danger btn-sm'>
+			 	 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+			   </button>
+			   <button class='btn btn-primary btn-sm'>
+			 	 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+			   </button>
+			   <hr/>
+		   </section>
+		</section>
+
+		<section class='panel-footer text-center'>
+			<!-- contains pagination -->
+			
+			<ul class="pagination">
+				<li ng-disabled='pagination.currentPage == 1' ng-click='fetchUserPage (1)'>
+					<a href="#">&laquo;</a>
+				</li>
+
+				<li ng-repeat='page in pagination.pages' ng-class='{active: pagination.currentPage == page}' ng-click='fetchUserPage (page)'>
+					<a>{{page}}</a>
+				</li>
+
+				<li ng-disabled='pagination.currentPage == pagiation.totalPages' ng-click='fetchUserPage (pagination.totalPages)'>
+					<a href="#">&raquo;</a>
+				</li>
+			</ul>
+			
+		</section>
+	</section>
+	
+</section>
